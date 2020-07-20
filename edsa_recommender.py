@@ -37,6 +37,9 @@ from utils.data_loader import load_movie_titles
 from recommenders.collaborative_based import collab_model
 from recommenders.content_based import content_model
 
+#HTML renders
+import codecs
+
 # Data Loading
 title_list = load_movie_titles('resources/data/movies.csv')
 
@@ -45,7 +48,7 @@ def main():
 
     # DO NOT REMOVE the 'Recommender System' option below, however,
     # you are welcome to add more options to enrich your app.
-    page_options = ["Recommender System","Solution Overview"]
+    page_options = ["Recommender System","Solution Overview","Visuals"]
 
     # -------------------------------------------------------------------
     # ----------- !! THIS CODE MUST NOT BE ALTERED !! -------------------
@@ -101,12 +104,34 @@ def main():
 
     # ------------- SAFE FOR ALTERING/EXTENSION -------------------
     if page_selection == "Solution Overview":
-        st.title("Solution Overview")
-        st.write("Describe your winning approach on this page")
+        #st.title("Solution Overview")
+        #st.write("Describe your winning approach on this page")
+        #st.image('resources/imgs/Image_header.png')
+        st.write('# Project Building Overview')
+        st.image('resources/imgs/Image_header.png',use_column_width=True)
+        page = codecs.open("resources/HTML/info_page.html", 'r', 'utf-8').read()
+        st.write(page, unsafe_allow_html=True)
+
+
 
     # You may want to add more sections here for aspects such as an EDA,
     # or to provide your business pitch.
 
+
+    #--------------------------------------------------------------------
+    if page_selection == "Visuals":
+
+        visual = st.sidebar.radio("Select Visual",
+                       ('Movies',
+                        'Genres',
+                        'Release years',
+                        'Cast'))
+
+        if visual =='Movies':
+            movie_visual = st.sidebar.radio("select movie visual",
+            ('All time popular movie',
+            'Current popular movies'))
+        st.write(visual)
 
 if __name__ == '__main__':
     main()

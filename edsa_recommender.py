@@ -48,7 +48,7 @@ def main():
 
     # DO NOT REMOVE the 'Recommender System' option below, however,
     # you are welcome to add more options to enrich your app.
-    page_options = ["Recommender System","Solution Overview","Visuals"]
+    page_options = ["Home","Visuals","Recommender System"]
 
     # -------------------------------------------------------------------
     # ----------- !! THIS CODE MUST NOT BE ALTERED !! -------------------
@@ -103,16 +103,32 @@ def main():
     # -------------------------------------------------------------------
 
     # ------------- SAFE FOR ALTERING/EXTENSION -------------------
-    if page_selection == "Solution Overview":
+    if page_selection == "Home":
         #st.title("Solution Overview")
         #st.write("Describe your winning approach on this page")
         #st.image('resources/imgs/Image_header.png')
         st.write('# Project Building Overview')
         st.image('resources/imgs/Image_header.png',use_column_width=True)
         page = codecs.open("resources/HTML/info_page.html", 'r', 'utf-8').read()
-        st.write(page, unsafe_allow_html=True)
+        st.markdown(page, unsafe_allow_html=True)
+        st.write(" ")
+        st.write("# Learn more about the recommenders")
+        st.image('resources/imgs/filters.png',use_column_width=True)
+        st.write(" ")
+        page = codecs.open("resources/HTML/filter_explanation.html", 'r', 'utf-8').read()
+        st.markdown(page, unsafe_allow_html=True)
 
+        st.write("# Approach to the winning solution")
 
+        st.write('# Meet the team')
+        st.markdown("""| Team member                             | Primary Duty                                                       |
+        | :---------------------                | :--------------------                                             |
+        | Marcus Moeng                 | Kaggle                           |
+        | Thabo Mahlangu | Recommender system model                |
+        | Stanley Kobo       | Simple implementation of content-based filtering.                 |
+        | Pinky Maredi                    | Trello |
+        | Claude Monareng                   | Folder to store model and data binaries if produced.              |
+        | Mukovhe Mukwevho                      | Streamlit |""")
 
     # You may want to add more sections here for aspects such as an EDA,
     # or to provide your business pitch.
@@ -120,6 +136,8 @@ def main():
 
     #--------------------------------------------------------------------
     if page_selection == "Visuals":
+
+        st.write("# Movie fun facts")
 
         visual = st.sidebar.radio("Select Visual",
                        ('Movies',
@@ -129,7 +147,7 @@ def main():
 
         if visual =='Movies':
             movie_visual = st.sidebar.radio("select movie visual",
-            ('All time popular movie',
+            ('All time popular movies',
             'Current popular movies'))
         st.write(visual)
 

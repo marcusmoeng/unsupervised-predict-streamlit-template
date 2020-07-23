@@ -66,9 +66,9 @@ def main():
 
         # User-based preferences
         st.write('### Enter Your Three Favorite Movies')
-        movie_1 = st.selectbox('Fisrt Option',title_list[14930:15200])
-        movie_2 = st.selectbox('Second Option',title_list[25055:25255])
-        movie_3 = st.selectbox('Third Option',title_list[21100:21200])
+        movie_1 = st.selectbox('first Option',title_list[0:250])
+        movie_2 = st.selectbox('Second Option',title_list[250:500])
+        movie_3 = st.selectbox('Third Option',title_list[500:1000])
         fav_movies = [movie_1,movie_2,movie_3]
 
         # Perform top-10 movie recommendation generation
@@ -136,20 +136,80 @@ def main():
 
     #--------------------------------------------------------------------
     if page_selection == "Visuals":
-
-        st.write("# Movie fun facts")
-
-        visual = st.sidebar.radio("Select Visual",
+        visual = st.sidebar.selectbox("Visual category",
                        ('Movies',
-                        'Genres',
-                        'Release years',
-                        'Cast'))
+                        'Genres'
+                        ))
 
         if visual =='Movies':
             movie_visual = st.sidebar.radio("select movie visual",
-            ('All time popular movies',
-            'Current popular movies'))
-        st.write(visual)
+            ('Top 5 Movies',
+            'Top 5 Actors',
+            'Movie title wordcloud'))
+
+            if movie_visual == 'Movie title wordcloud':
+                st.write('# Words used in movie titles')
+                st.image('resources/imgs/word_cloud.png')
+
+            elif movie_visual == 'Top 5 Actors':
+                st.write("# Top 5 Actors in our Database")
+                st.write('## 1. Samuel L. Jackson')
+                st.image('resources/imgs/samuel_jackson.jpg',width=10,use_column_width=True)
+                st.write('more...')
+
+                st.write('## 2. Steve Buscemi')
+                st.image('resources/imgs/steve_B.jpeg',use_column_width=True)
+
+                st.write("## 3. Robert De Niro")
+                st.image('resources/imgs/robert.jpg',use_column_width=True)
+
+                st.write("## 4. Nicolas Cage")
+                st.image('resources/imgs/cage.jpg',use_column_width=True)
+
+                st.write("## 5. Gerard Depardieu")
+                st.image('resources/imgs/gerard.jpg',use_column_width=True)
+
+
+            elif movie_visual == 'Top 5 Movies':
+                st.write("# The best 5 Movies")
+                st.write('## 1. Interstellar 2010')
+                st.image('resources/imgs/interstellar.jpg',use_column_width=True)
+
+                st.write('## 2. Django Unchained 2012')
+                st.image('resources/imgs/django.jpg',use_column_width=True)
+
+                st.write("## 3. Dark Knight Rises 2012")
+                st.image('resources/imgs/dark.jpg',use_column_width=True)
+
+                st.write("## 4. Avengers 2012")
+                st.image('resources/imgs/avengers.jpg',use_column_width=True)
+
+                st.write("## 5. Guardians of the Galaxy 2014")
+                st.image('resources/imgs/galaxy.jpeg',use_column_width=True)
+
+
+        if visual == "Genres":
+            #st.write('# Interesting info on Genres')
+            genre_visual = st.sidebar.radio("select genre visual",
+            ('Popularity',
+            'Runtime',
+            'Budget'))
+
+            if genre_visual == 'Popularity':
+                st.write('# Genre popularity')
+                st.image('resources/imgs/genres.png',use_column_width=True)
+
+                st.image('resources/imgs/tree_map.png',use_column_width=True)
+
+            elif genre_visual == 'Runtime':
+                st.image('resources/imgs/genre_runtime.png',use_column_width=True)
+
+            else:
+                st.image('resources/imgs/genre_budget.png',use_column_width=True)
+
+
+
+
 
 if __name__ == '__main__':
     main()

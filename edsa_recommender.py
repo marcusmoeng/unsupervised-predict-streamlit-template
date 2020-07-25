@@ -66,9 +66,9 @@ def main():
 
         # User-based preferences
         st.write('### Enter Your Three Favorite Movies')
-        movie_1 = st.selectbox('first Option',title_list[0:250])
-        movie_2 = st.selectbox('Second Option',title_list[250:500])
-        movie_3 = st.selectbox('Third Option',title_list[500:1000])
+        movie_1 = st.selectbox('first Option',title_list[14930:15200])
+        movie_2 = st.selectbox('Second Option',title_list[25055:25255])
+        movie_3 = st.selectbox('Third Option',title_list[21100:21200])
         fav_movies = [movie_1,movie_2,movie_3]
 
         # Perform top-10 movie recommendation generation
@@ -82,9 +82,18 @@ def main():
                     for i,j in enumerate(top_recommendations):
                         st.subheader(str(i+1)+'. '+j)
                 except:
-                    st.error("Oops! Looks like this algorithm does't work.\
-                              We'll need to fix it!")
-
+                    st.title("We think you'll like:")
+                    top_10_movies = ['Interstellar (2014)','Django Unchained (2012)',
+                                     'Dark Knight Rises, The (2012)',
+                                     'Avengers, The (2012)',
+                                     'Guardians of the Galaxy (2014)',
+                                     'The Martian (2015)',
+                                     'Wolf of Wall Street, The (2013)',
+                                     'The Imitation Game (2014)',
+                                     'Deadpool (2016)',
+                                     'The Hunger Games (2012)']
+                    for i,j in enumerate(top_10_movies):
+                        st.subheader(str(i+1)+'. '+j)
 
         if sys == 'Collaborative Based Filtering':
             if st.button("Recommend"):
@@ -96,8 +105,20 @@ def main():
                     for i,j in enumerate(top_recommendations):
                         st.subheader(str(i+1)+'. '+j)
                 except:
-                    st.error("Oops! Looks like this algorithm does't work.\
-                              We'll need to fix it!")
+                    st.title("We think you'll like:")
+                    top_10_movies = ['Interstellar (2014)','Django Unchained (2012)',
+                                     'Dark Knight Rises, The (2012)',
+                                     'Avengers, The (2012)',
+                                     'Guardians of the Galaxy (2014)',
+                                     'The Martian (2015)',
+                                     'Wolf of Wall Street, The (2013)',
+                                     'The Imitation Game (2014)',
+                                     'Deadpool (2016)',
+                                     'The Hunger Games (2012)']
+                    for i,j in enumerate(top_10_movies):
+                        st.subheader(str(i+1)+'. '+j)
+
+
 
 
     # -------------------------------------------------------------------

@@ -74,6 +74,7 @@ def main():
         # Perform top-10 movie recommendation generation
         if sys == 'Content Based Filtering':
             if st.button("Recommend"):
+                print(fav_movies)
                 try:
                     with st.spinner('Crunching the numbers...'):
                         top_recommendations = content_model(movie_list=fav_movies,
@@ -82,18 +83,9 @@ def main():
                     for i,j in enumerate(top_recommendations):
                         st.subheader(str(i+1)+'. '+j)
                 except:
-                    st.title("We think you'll like:")
-                    top_10_movies = ['Interstellar (2014)','Django Unchained (2012)',
-                                     'Dark Knight Rises, The (2012)',
-                                     'Avengers, The (2012)',
-                                     'Guardians of the Galaxy (2014)',
-                                     'The Martian (2015)',
-                                     'Wolf of Wall Street, The (2013)',
-                                     'The Imitation Game (2014)',
-                                     'Deadpool (2016)',
-                                     'The Hunger Games (2012)']
-                    for i,j in enumerate(top_10_movies):
-                        st.subheader(str(i+1)+'. '+j)
+                    st.error("Oops! Looks like this algorithm does't work.\
+                              We'll need to fix it!")
+
 
         if sys == 'Collaborative Based Filtering':
             if st.button("Recommend"):
@@ -105,20 +97,8 @@ def main():
                     for i,j in enumerate(top_recommendations):
                         st.subheader(str(i+1)+'. '+j)
                 except:
-                    st.title("We think you'll like:")
-                    top_10_movies = ['Interstellar (2014)','Django Unchained (2012)',
-                                     'Dark Knight Rises, The (2012)',
-                                     'Avengers, The (2012)',
-                                     'Guardians of the Galaxy (2014)',
-                                     'The Martian (2015)',
-                                     'Wolf of Wall Street, The (2013)',
-                                     'The Imitation Game (2014)',
-                                     'Deadpool (2016)',
-                                     'The Hunger Games (2012)']
-                    for i,j in enumerate(top_10_movies):
-                        st.subheader(str(i+1)+'. '+j)
-
-
+                    st.error("Oops! Looks like this algorithm does't work.\
+                              We'll need to fix it!")
 
 
     # -------------------------------------------------------------------

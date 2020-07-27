@@ -127,15 +127,15 @@ def content_model(movie_list,top_n=10):
             recommended_movies.append(list(movies['title'])[i])
 
 
-        elif len(listings_list)==1:
-            listing = listings_list[0]
+    elif len(listings_list)==1:
+        listing = listings_list[0]
 
-            # Store movie names
-            recommended_movies = []
-            # Appending the names of movies
-            top_50_indexes = list(listing.iloc[1:50].index)
-            # Removing chosen movies
-            top_indexes = np.setdiff1d(top_50_indexes,[idx_1,idx_2,idx_3])
+        # Store movie names
+        recommended_movies = []
+        # Appending the names of movies
+        top_50_indexes = list(listing.iloc[1:50].index)
+        # Removing chosen movies
+        top_indexes = np.setdiff1d(top_50_indexes,[idx_1,idx_2,idx_3])
         for i in top_indexes[:top_n]:
             recommended_movies.append(list(movies['title'])[i])
 

@@ -120,6 +120,15 @@ def main():
         st.markdown(page, unsafe_allow_html=True)
 
         st.write("# Approach to the winning solution")
+        st.markdown("""
+            For the content based filter, we applied the cosine similarity method to find
+            similarities between genres and keywords for selected movie titles.
+
+            For the collaborative based filter, we use the Singular Value Decomposition(SVD)
+            algorithm to find similar users. We then recommend movies that the predicted users have
+            already watched.
+
+        """)
 
         st.write('# Meet the team')
         st.markdown("""| Team member                             | Primary Duty                                                       |

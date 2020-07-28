@@ -33,8 +33,8 @@ import pandas as pd
 import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.metrics.pairwise import linear_kernel
-from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.feature_extraction.text import TfidfVectorizer
 
 # Importing data
 movies = pd.read_csv('resources/data/movies.csv', sep = ',',delimiter=',')
@@ -82,62 +82,57 @@ def content_model(movie_list,top_n=10):
     """
     # Initializing the empty list of recommended movies
     recommended_movies = []
-    data = data_preprocessing(5000)
+    data = data_preprocessing(27000)
     # Instantiating and generating the count matrix
-    count_vec = TfidfVectorizer(analyzer='word',ngram_range=(1, 2),min_df=0, stop_words='english')
+    count_vec = TfidfVectorizer()
     count_matrix = count_vec.fit_transform(data['keyWords'])
     indices = pd.Series(data['title'])
     cosine_sim = linear_kernel(count_matrix, count_matrix)
-
-
     # Getting the index of the movie that matches the title
     idx_1 = indices[indices == movie_list[0]].index[0]
     idx_2 = indices[indices == movie_list[1]].index[0]
     idx_3 = indices[indices == movie_list[2]].index[0]
 
-    ##
-    idx_list = [idx_1,idx_2,idx_3]
-    listings_list = []
+    listing_list = []
 
-    for index in idx_list:
+    index_list = list([idx_1,idx_2,idx_3])
+
+    for idx in index_list:
         try:
-            rank = cosine_sim[index]
+            rank = cosine_sim[idx]
             score_series = pd.Series(rank).sort_values(ascending = False)
-            listings_list.append(score_series)
-
+            listing_list.append(score_series)
         except:
             pass
 
-    if len(listings_list) >1:
-        listing = listings_list[0]
-        for i in range(1,len(listings_list)):
+    if len(listing_list)==1:
+        listings = listing_list[0]
 
-            listing.append(listings_list[i])
-
-
-        #listings = listings.sort_values(ascending=False)
-
-        # Store movie names
         recommended_movies = []
         # Appending the names of movies
-        top_50_indexes = list(listing.iloc[1:50].index)
+        top_50_indexes = list(listings.iloc[1:50].index)
         # Removing chosen movies
         top_indexes = np.setdiff1d(top_50_indexes,[idx_1,idx_2,idx_3])
         for i in top_indexes[:top_n]:
             recommended_movies.append(list(movies['title'])[i])
+        return recommended_movies
 
+    elif len(listing_list)>1:
+        listings = listing_list[0]
+        for listing_entry in listing_list[1:]:
+            listings.append(listing_entry)
 
-    elif len(listings_list)==1:
-        listing = listings_list[0]
+        listings = listings.sort_values(ascending=True)
 
-        # Store movie names
         recommended_movies = []
         # Appending the names of movies
-        top_50_indexes = list(listing.iloc[1:50].index)
+        top_50_indexes = list(listings.iloc[1:50].index)
         # Removing chosen movies
         top_indexes = np.setdiff1d(top_50_indexes,[idx_1,idx_2,idx_3])
         for i in top_indexes[:top_n]:
             recommended_movies.append(list(movies['title'])[i])
+        return recommended_movies
+
 
     else:
         recommended_movies = ['Interstellar (2014)','Django Unchained (2012)',
@@ -150,5 +145,4 @@ def content_model(movie_list,top_n=10):
                      'Deadpool (2016)',
                      'The Hunger Games (2012)']
 
-
-    return recommended_movies
+        return recommended_movies
